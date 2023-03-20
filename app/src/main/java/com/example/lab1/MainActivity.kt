@@ -1,10 +1,12 @@
 package com.example.lab1
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,13 +30,13 @@ class MainActivity : AppCompatActivity() {
         text2.text=cat3.name;
         text3.text=cat2.name;
         button1.setOnClickListener {
-            goleyaut(image1,button1,cat1)
+            goactivity(image1,cat1)
         }
         button2.setOnClickListener {
-            goleyaut(image2,button2,cat2)
+            goactivity(image2,cat2)
         }
         button3.setOnClickListener {
-            goleyaut(image3,button3,cat3)
+            goactivity(image3,cat3)
         }
 
 
@@ -42,13 +44,21 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-    fun goleyaut(image:Int, button: Button, cat:Animal){
-        setContentView(R.layout.deteil)
-        val image1 = findViewById<ImageView>(R.id.imageView4)
-        val nameText = findViewById<TextView>(R.id.textView)
-        val descriptionText = findViewById<TextView>(R.id.textView5)
-        nameText.text=cat.name
-        descriptionText.text=cat.description
-        image1.setImageResource(image)
+    fun goactivity(image:Int, cat:Animal){
+
+        startActivity(Intent(this, card::class.java).apply {
+            putExtra("name",cat.name)
+            putExtra("desc",cat.description)
+            putExtra("image",image)
+
+        }
+        )
+
+        //val image1 = findViewById<ImageView>(R.id.imageView4)
+       // val nameText = findViewById<TextView>(R.id.textView)
+       // val descriptionText = findViewById<TextView>(R.id.textView5)
+       // nameText.text=cat.name
+      //  descriptionText.text=cat.description
+     //   image1.setImageResource(image)
     }
 }
